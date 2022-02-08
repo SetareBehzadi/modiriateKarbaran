@@ -32,3 +32,7 @@ Route::group(['prefix' => 'panel', 'middleware' => 'role:admin' , 'namespace'=>'
     Route::get('roles/{role}/edit', 'RoleController@edit')->name('roles.edit');
     Route::post('roles/{role}/edit', 'RoleController@update')->name('roles.update');
 });
+
+Route::group(['namespace'=>'App\Http\Controllers'], function () {
+    Route::get('products', 'ProductsController@index')->name('products.index');
+});
