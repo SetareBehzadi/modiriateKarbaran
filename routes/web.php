@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Storage\Contracts\StorageInterface;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,11 @@ Route::group(['prefix' => 'panel', 'middleware' => 'role:admin' , 'namespace'=>'
 
 Route::group(['namespace'=>'App\Http\Controllers'], function () {
     Route::get('products', 'ProductsController@index')->name('products.index');
+    Route::get('basket/add/{product}', 'BasketController@add')->name('basket.add');
+    Route::get('basket', 'BasketController@index')->name('basket.index');
+    Route::get('basket/clear','BasketController@clear' );
+
+});
+Route::get('basket/clear', function () {
+    resolve(StorageInterface::class)->clear();
 });
